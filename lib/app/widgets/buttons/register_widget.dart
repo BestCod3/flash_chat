@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class RegisterWidget extends StatelessWidget {
-  const RegisterWidget({Key? key, required this.onTap}) : super(key: key);
+  const RegisterWidget({Key? key, required this.onTap, required this.text})
+      : super(key: key);
   final Function()? onTap;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -16,7 +18,7 @@ class RegisterWidget extends StatelessWidget {
           ], borderRadius: BorderRadius.circular(7), color: Colors.white),
           child: Center(
             child: Text(
-              "Sign Up",
+              text,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
           ),

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -6,12 +9,25 @@ class SignUpController extends GetxController {
   Rx<String> name = "".obs;
   Rx<String> password = "".obs;
 
+  CollectionReference user = FirebaseFirestore.instance.collection("users");
+  Future<void> addUserName() async {
+    return user
+        .add({
+          'name': name.value,
+          'email': email.value,
+        })
+        .then((value) => log('User added!'))
+        .catchError((error) => log("Failed to add user: $error"));
+  }
+
   Future<void> signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email.value,
-        password: password.value,
-      );
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: email.value,
+            password: password.value,
+          )
+          .then((value) => addUserName());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

@@ -1,3 +1,4 @@
+import 'package:flash_chat/app/modules/signIn/views/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../widgets/buttons/register_widget.dart';
@@ -6,8 +7,10 @@ import '../../../widgets/text/Or Sign.dart';
 import '../../../widgets/textField/inputDecoration.dart';
 import '../controllers/sign_up_controller.dart';
 
-class SignUpView extends GetView<SignUpController> {
-  const SignUpView({Key? key}) : super(key: key);
+class SignUpView extends StatelessWidget {
+  SignUpView({Key? key}) : super(key: key);
+  final controller = Get.put(SignUpController());
+
   @override
   Widget build(BuildContext context) {
     const sizedBox = SizedBox(
@@ -24,6 +27,7 @@ class SignUpView extends GetView<SignUpController> {
       //   centerTitle: true,
       // ),
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
@@ -81,9 +85,14 @@ class SignUpView extends GetView<SignUpController> {
                       FocusNode();
                       controller.signUp();
                     },
+                    text: "Sign Up",
                   ),
                   sizedBox,
-                  const OrSign(text: "Or Sign Up with"),
+                  OrSign(
+                    text: "Or Sign Up with",
+                    text1: "",
+                    onTap: () {},
+                  ),
                   sizedBox,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +107,13 @@ class SignUpView extends GetView<SignUpController> {
                   ),
                   sizedBox,
                   sizedBox,
-                  const OrSign(text: "Already have an account? Login Now"),
+                  OrSign(
+                    text: "Already have an account?   ",
+                    text1: "Login Now",
+                    onTap: () {
+                      Get.to(SignInView());
+                    },
+                  ),
                 ],
               ),
             ),
