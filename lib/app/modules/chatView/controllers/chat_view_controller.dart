@@ -19,4 +19,8 @@ class ChatViewController extends GetxController {
     smsController.clear();
     FocusManager.instance.primaryFocus?.unfocus();
   }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getStreamMessages() {
+    return ChatService.getStreamMessages();
+  }
 }

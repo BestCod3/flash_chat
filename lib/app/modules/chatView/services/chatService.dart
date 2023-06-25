@@ -14,6 +14,14 @@ class ChatService {
         dateTime: DateTime.now(),
       );
       final _chats = FirebaseFirestore.instance.collection('chats');
+      await _chats.add(_userModel.toMap());
     }
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getStreamMessages() {
+    return FirebaseFirestore.instance
+        .collection('chats')
+        .orderBy('dateTime', descending: true)
+        .snapshots();
   }
 }

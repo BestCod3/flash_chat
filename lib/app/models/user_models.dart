@@ -22,7 +22,7 @@ class UserModel {
     return UserModel(
         sender: map['sender'],
         sms: map['sms'],
-        dateTime: map['dateTime'],
-        isMe: map['isMe']);
+        dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime']),
+        isMe: map['isMe'] != null ? map['isMe'] : false);
   }
 }
