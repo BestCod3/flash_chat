@@ -1,23 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/app/models/user_models.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../services/chatService.dart';
+
 class ChatViewController extends GetxController {
-  //TODO: Implement ChatViewController
+  // RxString sms = ''.obs;
+  TextEditingController smsController = TextEditingController();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Future<void> sendMessages() async {
+    final sms = smsController.text.trim();
+    if (sms != '') {
+      await ChatService.sendMessages(sms);
+    }
+
+    smsController.clear();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

@@ -9,4 +9,20 @@ class UserModel {
       required this.sms,
       required this.dateTime,
       this.isMe});
+  Map<String, dynamic> toMap() {
+    return {
+      'sender': sender,
+      'sms': sms,
+      'dateTime': dateTime.millisecondsSinceEpoch,
+      'isMe': isMe,
+    };
+  }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+        sender: map['sender'],
+        sms: map['sms'],
+        dateTime: map['dateTime'],
+        isMe: map['isMe']);
+  }
 }
